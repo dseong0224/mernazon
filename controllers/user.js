@@ -8,9 +8,10 @@ exports.signup = (req, res) => {
       return res.status(400).json({
         error
       });
+    } else {
+      res.json({
+        user
+      });
     }
-    res.json({
-      user
-    });
   });
 };

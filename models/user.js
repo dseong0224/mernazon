@@ -44,7 +44,7 @@ const userSchema = new mongoose.Schema(
 //virtual field
 userSchema
   .virtual("password")
-  .set(password => {
+  .set(function(password) {
     this._password = password;
     this.salt = uuidv1();
     this.hashed_password = this.encryptPassword(password);
@@ -58,7 +58,7 @@ userSchema.methods = {
     if (!password) return "";
     try {
       return crypto
-        .createHmac("sha", this.salt)
+        .createHmac("sha1", this.salt)
         .update(password)
         .digest("hex");
     } catch (err) {
